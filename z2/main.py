@@ -1,6 +1,12 @@
 from simpful import *
 
 """
+Implementacja:
+- Sylwester Kąkol
+- Adam Jurkiewicz
+"""
+
+"""
 Create a fuzzy system object
 """
 FS = FuzzySystem()
