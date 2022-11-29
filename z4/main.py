@@ -8,14 +8,20 @@ with open("data_haberman.json") as haberman:
 from mlxtend.plotting import plot_decision_regions
 from sklearn import svm, model_selection, decomposition, metrics
 
+"""
+Implementation:
+- Adam Jurkiewicz
+- Sylwester Kąkol
+
+Implementation of Decision Tree and Support Vector Machine in order to classify two example datasets
+    a) Banknote Authenticity
+    b) Haberman's Survival
+"""
 
 def classify_svc(dataset, split_size, kernel, C, gamma, title):
     """
-    Splits the data and target into train and test parts. Also
-    selects one of the two algorithms and allows modification of
-    test-train proportion.
-    Depending on the algorithm chosen uses either SVC or Decision Tree
-    to classify given data.
+    Trains SVC model on train part of the dataset with received configuration (kernel, c & gamma).
+    Classifies and compares the result to the test part.
 
     :param dataset: The dataset - with data and target values - to classify.
     :type dataset: dict
@@ -26,15 +32,10 @@ def classify_svc(dataset, split_size, kernel, C, gamma, title):
     :param C: Regularization parameter. Higher the value, larger-margin separating hyperplane.
     :type C: int
     :param gamma: How far the influence reaches.
-    Higher the value, only closest points to the separation line are considered.
     :type gamma: float
     :param title: Chart title
     :type title: str
     :return score: Value in range of 0-1 representing total score of the model.
-    """
-
-    """
-    Create Train and Test splits of data and target variables
     """
     X_train, X_test, y_train, y_test = model_selection.train_test_split(dataset['data'], np.array(dataset['target']), test_size=split_size)
 
