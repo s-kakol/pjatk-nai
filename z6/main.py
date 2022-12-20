@@ -18,11 +18,7 @@ def get_angle(vertice1, vertice2, vertice3):
 face_cascade = cv2.CascadeClassifier(
     './haarcascade_frontalface_default.xml'
 )
-if face_cascade.empty():
-    raise IOError('Failed to load cascade classifier xml file')
 
-color_red_kill = (0, 0, 255)
-color_green_live = (0, 255, 0)
 mp_drawing = mp.solutions.drawing_utils
 mp_styles = mp.solutions.drawing_styles
 mp_pose = mp.solutions.pose
@@ -31,19 +27,17 @@ camera = cv2.VideoCapture(0)
 with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as pose:
     while camera.isOpened():
         _, frame = camera.read()
-        headshot_mode = True
-        color = (0, 255, 0)
-
         if not _:
             continue
 
+        height, width, _ = frame.shape
+        headshot_mode = True
+        color = (0, 255, 0)
         landmarks = []
 
         frame.flags.writeable = False
         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         mp_processed = pose.process(frame)
-
-        height, width, _ = frame.shape
 
         for landmark in mp_processed.pose_landmarks.landmark:
             landmarks.append((int(landmark.x * width), int(landmark.y * height), int(landmark.z * width)))
