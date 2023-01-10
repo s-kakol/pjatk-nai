@@ -11,6 +11,9 @@ Prototyp maszyny do gry w "Baba Jaga patrzy"
     Wybrane funkcjonalności:
     - Narysować celownik na twarzy celu
     - Nie strzelać gdy uczestnik się poddaje
+    
+Filmik potwierdzający działanie gry:
+    https://youtu.be/jSwvWvLoT3Y
 """
 
 
@@ -74,11 +77,6 @@ with mp_pose.Pose(min_detection_confidence=0.5, min_tracking_confidence=0.5) as 
         right_shoulder = get_angle(landmarks[mp_pose.PoseLandmark.RIGHT_ELBOW.value],
                                    landmarks[mp_pose.PoseLandmark.RIGHT_SHOULDER.value],
                                    landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value])
-
-        # print(f"LEFT ELBOW: {left_elbow}")
-        # print(f"RIGHT ELBOW: {right_elbow}")
-        # print(f"LEFT SHOULDER: {left_shoulder}")
-        # print(f"RIGHT SHOULDER: {right_shoulder}")
 
         # Jeśli wyliczone uprzednio kąty mieszczą się w określonym zasięgu to nie strzelamy do celu
         if (70 < left_elbow < 125 and 240 < right_elbow < 300) or (
